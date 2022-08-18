@@ -23,12 +23,28 @@ public class Main {
 //        4. +Найти сотрудника с максимальной зарплатой.
 //        5. +Подсчитать среднее значение зарплат (можно использовать для этого метод из пункта 8.2).
 //        6. +Получить Ф. И. О. всех сотрудников (вывести в консоль).
+
+        //- **Повышенная сложность**
+        //    Создать дополнительные статические методы для решения следующих задач.
+        //
+        //    1. +Проиндексировать зарплату (вызвать изменение зарплат у всех сотрудников на величину аргумента в %).
+        //    2. Получить в качестве параметра номер отдела (1–5) и найти (всего 6 методов):
+        //        +1. Сотрудника с минимальной зарплатой.
+        //        +2. Сотрудника с максимальной зарплатой.
+        //        +3. Сумму затрат на зарплату по отделу.
+        //        +4. Среднюю зарплату по отделу (учесть, что количество людей в отделе отличается от employees.length).
+        //        +5. Проиндексировать зарплату всех сотрудников отдела на процент, который приходит в качестве параметра.
+        //        +6. Напечатать всех сотрудников отдела (все данные, кроме отдела).
+        //    3. Получить в качестве параметра число и найти:
+        //        +1. Всех сотрудников с зарплатой меньше числа (вывести id, Ф. И. О. и зарплатой в консоль).
+        //        +2. Всех сотрудников с зарплатой больше (или равно) числа (вывести id, Ф. И. О. и зарплатой в консоль).
+
         System.out.println("Базовая сложность");
         Employee[] employeeStorage = new Employee[10];  //делаю так "вручную" потому-что насколько я понял добавлять в массив методом это уже 3й уровень
         employeeStorage[0] = new Employee("Первый Сотрудник Сотрудниковый", 1, 100000);
         employeeStorage[1] = new Employee("Второй Сотрудник Сотрудниковый", 1, 200000);
         employeeStorage[2] = new Employee("Третий Сотрудник Сотрудниковый", 2, 300000);
-        employeeStorage[3] = new Employee("Четвёртый Сотрудник Сотрудниковый", 3, 50000);
+        employeeStorage[3] = new Employee("Четвёртый Сотрудник Сотрудниковый", 1, 50000);
         employeeStorage[4] = new Employee("Пятый Сотрудник Сотрудниковый", 4, 150000);
         employeeStorage[5] = new Employee("Шестой Сотрудник Сотрудниковый", 2, 300000);
         employeeStorage[6] = new Employee("Седьмой Сотрудник Сотрудниковый", 3, 170000);
@@ -47,6 +63,25 @@ public class Main {
         System.out.println("Средняя ЗП за месяц: "+Employee.averageSalary(employeeStorage));
         System.out.println();
         Employee.printAllEmployeesFIO(employeeStorage);
+        System.out.println("Повышенная сложность");
+        Employee.increaseSalaryByPercent(employeeStorage, 10);
+        Employee.printAllEmployees(employeeStorage);
+        System.out.println();
+        Employee.minSalaryEmployeeInDept(employeeStorage, 1);
+        System.out.println();
+        Employee.maxSalaryEmployeeInDept(employeeStorage, 1);
+        System.out.println();
+        Employee.monthSalaryInDept(employeeStorage, 1);
+        System.out.println();
+        Employee.averageSalaryInDept(employeeStorage, 1);
+        System.out.println();
+        Employee.increaseSalaryByPercentInDept(employeeStorage, 1, 25);
+        Employee.printAllInDept(employeeStorage,1);
+        System.out.println();
+        Employee.printAllLowerThanThis(employeeStorage,120000);
+        System.out.println();
+        Employee.printAllUpperThanThis(employeeStorage,200000);
+
 
 
     }

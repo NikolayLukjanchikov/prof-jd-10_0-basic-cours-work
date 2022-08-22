@@ -39,49 +39,65 @@ public class Main {
         //        +1. Всех сотрудников с зарплатой меньше числа (вывести id, Ф. И. О. и зарплатой в консоль).
         //        +2. Всех сотрудников с зарплатой больше (или равно) числа (вывести id, Ф. И. О. и зарплатой в консоль).
 
+        //- **Очень сложно**
+        //    Привести структуру проекта к ООП.
+        //    1. Создать класс EmployeeBook.
+        //    2. Перенести хранилище сотрудников в него (массив), закрыть к нему доступ извне (сделать приватным).
+        //    3. Все статические методы по работе с массивом перенести в этот класс и сделать нестатическими.
+        //    4. Добавить несколько новых методов:
+        //        1. Добавить нового сотрудника (создаем объект, заполняем поля, кладем в массив).
+        //        Нужно найти свободную ячейку в массиве и добавить нового сотрудника в нее. Искать нужно всегда с начала, так как возможно добавление в ячейку удаленных ранее сотрудников.
+        //        2. Удалить сотрудника (находим сотрудника по Ф. И. О. и/или id, обнуляем его ячейку в массиве).
+        //    5. Изменить сотрудника (получить сотрудника по Ф. И. О., модернизировать его запись):
+        //        1. Изменить зарплату.
+        //        2. Изменить отдел.
+        //        Придумать архитектуру. Сделать или два метода, или один, но продумать его.
+        //    6. Получить Ф. И. О. всех сотрудников по отделам (напечатать список отделов и их сотрудников).
+
         System.out.println("Базовая сложность");
-        Employee[] employeeStorage = new Employee[10];  //делаю так "вручную" потому-что насколько я понял добавлять в массив методом это уже 3й уровень
-        employeeStorage[0] = new Employee("Первый Сотрудник Сотрудниковый", 1, 100000);
-        employeeStorage[1] = new Employee("Второй Сотрудник Сотрудниковый", 1, 200000);
-        employeeStorage[2] = new Employee("Третий Сотрудник Сотрудниковый", 2, 300000);
-        employeeStorage[3] = new Employee("Четвёртый Сотрудник Сотрудниковый", 1, 50000);
-        employeeStorage[4] = new Employee("Пятый Сотрудник Сотрудниковый", 4, 150000);
-        employeeStorage[5] = new Employee("Шестой Сотрудник Сотрудниковый", 2, 300000);
-        employeeStorage[6] = new Employee("Седьмой Сотрудник Сотрудниковый", 3, 170000);
-        employeeStorage[7] = new Employee("Восьмой Сотрудник Сотрудниковый", 4, 110000);
-        employeeStorage[8] = new Employee("Девятый Сотрудник Сотрудниковый", 5, 210000);
-        employeeStorage[9] = new Employee("Десятый Сотрудник Сотрудниковый", 5, 50000);
 
-        Employee.printAllEmployees(employeeStorage);
-        System.out.println();
-        System.out.println("Сумма затрат на зарплаты в месяц: " + Employee.salarySummPerMonth(employeeStorage));
-        System.out.println();
-        Employee.minSalary(employeeStorage);
-        System.out.println();
-        Employee.maxSalary(employeeStorage);
-        System.out.println();
-        System.out.println("Средняя ЗП за месяц: "+Employee.averageSalary(employeeStorage));
-        System.out.println();
-        Employee.printAllEmployeesFIO(employeeStorage);
-        System.out.println("Повышенная сложность");
-        Employee.increaseSalaryByPercent(employeeStorage, 10);
-        Employee.printAllEmployees(employeeStorage);
-        System.out.println();
-        Employee.minSalaryEmployeeInDept(employeeStorage, 1);
-        System.out.println();
-        Employee.maxSalaryEmployeeInDept(employeeStorage, 1);
-        System.out.println();
-        Employee.monthSalaryInDept(employeeStorage, 1);
-        System.out.println();
-        Employee.averageSalaryInDept(employeeStorage, 1);
-        System.out.println();
-        Employee.increaseSalaryByPercentInDept(employeeStorage, 1, 25);
-        Employee.printAllInDept(employeeStorage,1);
-        System.out.println();
-        Employee.printAllLowerThanThis(employeeStorage,120000);
-        System.out.println();
-        Employee.printAllUpperThanThis(employeeStorage,200000);
+        EmployeeBook employeeBook = new EmployeeBook();
 
+        employeeBook.getEmployees()[0] = new Employee("Первый Сотрудник Сотрудниковый", 1, 100000);
+        employeeBook.getEmployees()[1] = new Employee("Второй Сотрудник Сотрудниковый", 1, 200000);
+        employeeBook.getEmployees()[2] = new Employee("Третий Сотрудник Сотрудниковый", 2, 300000);
+        employeeBook.getEmployees()[3] = new Employee("Четвёртый Сотрудник Сотрудниковый", 2, 50000);
+        employeeBook.getEmployees()[4] = new Employee("Пятый Сотрудник Сотрудниковый", 4, 150000);
+        employeeBook.getEmployees()[5] = new Employee("Шестой Сотрудник Сотрудниковый", 2, 120000);
+        employeeBook.getEmployees()[6] = new Employee("Седьмой Сотрудник Сотрудниковый", 3, 170000);
+        employeeBook.getEmployees()[8] = new Employee("Девятый Сотрудник Сотрудниковый", 5, 210000);
+        employeeBook.getEmployees()[9] = new Employee("Десятый Сотрудник Сотрудниковый", 5, 50000);
+
+
+        employeeBook.printAllEmployees(employeeBook.getEmployees());
+        System.out.println();
+        System.out.println("Сумма затрат на зарплаты в месяц: " + employeeBook.getSalarySumPerMonth(employeeBook.getEmployees()));
+        System.out.println();
+        employeeBook.printAllEmployeesWithMinSalary(employeeBook.getEmployees());
+        System.out.println();
+        employeeBook.printAllEmployeesWithMaxSalary(employeeBook.getEmployees());
+        System.out.println();
+        System.out.println("Средняя ЗП за месяц: " + employeeBook.getAverageSalary(employeeBook.getEmployees()));
+        System.out.println();
+        employeeBook.printAllEmployeesFullName(employeeBook.getEmployees());
+        System.out.println();
+        employeeBook.setIncreaseSalaryByPercentToAllEmployees(employeeBook.getEmployees(), 10);
+        employeeBook.printAllEmployees(employeeBook.getEmployees());
+        System.out.println();
+        employeeBook.printEmployeeWithMinSalaryInDept(employeeBook.getEmployees(), 2);
+        System.out.println();
+        employeeBook.printEmployeeWithMaxSalaryInDept(employeeBook.getEmployees(), 2);
+        System.out.println();
+        employeeBook.printMonthSalaryInDept(employeeBook.getEmployees(), 2);
+        System.out.println();
+        employeeBook.printAverageSalaryInDept(employeeBook.getEmployees(), 2);
+        System.out.println();
+        employeeBook.setIncreaseSalaryByPercentInDept(employeeBook.getEmployees(), 2, 30);
+        employeeBook.printAllInDept(employeeBook.getEmployees(), 2);
+        System.out.println();
+        employeeBook.printAllEmployeesSalaryLowerThanThis(employeeBook.getEmployees(), 120000);
+        System.out.println();
+        employeeBook.printAllEmployeesSalaryUpperThanThis(employeeBook.getEmployees(), 200000);
 
 
     }

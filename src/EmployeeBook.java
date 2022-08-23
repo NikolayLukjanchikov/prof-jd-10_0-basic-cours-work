@@ -18,6 +18,20 @@ public class EmployeeBook {
     //    6. Получить Ф. И. О. всех сотрудников по отделам (напечатать список отделов и их сотрудников).
     private Employee[] employees = new Employee[10];
 
+    public void addNewEmployee(Employee newEmployee) {
+        boolean isEmployeeNotInBook = true;
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i] != null) {
+                if (employees[i].equals(newEmployee)) {
+                    System.out.println("Такой сотрудник " + employees[i] + " уже есть в базе");
+                    isEmployeeNotInBook = false;
+                }
+            } else if (isEmployeeNotInBook) {
+                employees[i] = newEmployee;
+            }
+        }
+    }
+
     public void printAllEmployees(Employee[] employeesList) {
         for (int i = 0; i < employeesList.length; i++) {
             if (employeesList[i] != null) {

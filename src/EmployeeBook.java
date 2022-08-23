@@ -32,6 +32,14 @@ public class EmployeeBook {
         }
     }
 
+    public void deleteEmployee(String fullNameEmployeeToDelete, int id) {
+        for (int i = 0; i < employees.length; i++) {
+            if ((employees[i] != null) && ((employees[i].getFio().equals(fullNameEmployeeToDelete))) || (employees[i].getId()==id)) {
+                employees[i] = null;
+            }
+        }
+    }
+
     public void printAllEmployees(Employee[] employeesList) {
         for (int i = 0; i < employeesList.length; i++) {
             if (employeesList[i] != null) {

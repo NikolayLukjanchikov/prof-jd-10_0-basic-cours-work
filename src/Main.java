@@ -100,8 +100,10 @@ public class Main {
         employeeBook.printAllEmployeesSalaryUpperThanThis(employeeBook.getEmployees(), 200000);
         //добавляем нового
         System.out.println();
-        employeeBook.addNewEmployee(new Employee("Третий Сотрудник Сотрудниковый", 5, 50000));
+        employeeBook.addNewEmployee(new Employee("Новый Сотрудник Сотрудниковый", 5, 50000));
         employeeBook.printAllEmployees(employeeBook.getEmployees());
-
+        System.out.println();
+        employeeBook.deleteEmployee("Десятый Сотрудник Сотрудниковый", 0);
+        employeeBook.printAllEmployees(employeeBook.getEmployees());
     }
 }

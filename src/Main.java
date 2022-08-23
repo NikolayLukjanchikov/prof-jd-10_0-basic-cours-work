@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-//напишите программу, которая занимается учетом сотрудников и помогает кадрам и бухгалтерии автоматизировать процессы.
+//Напишите программу, которая занимается учетом сотрудников и помогает кадрам и бухгалтерии автоматизировать процессы.
 //С помощью вашей программы бухгалтерия и отдел кадров смогут узнавать следующую информацию:
 //1. Получить список всех сотрудников.
 //2. Посчитать сумму затрат на зарплаты.
@@ -41,18 +41,18 @@ public class Main {
 
         //- **Очень сложно**
         //    Привести структуру проекта к ООП.
-        //    1. Создать класс EmployeeBook.
-        //    2. Перенести хранилище сотрудников в него (массив), закрыть к нему доступ извне (сделать приватным).
-        //    3. Все статические методы по работе с массивом перенести в этот класс и сделать нестатическими.
-        //    4. Добавить несколько новых методов:
+        //    1. +Создать класс EmployeeBook.
+        //    2. +Перенести хранилище сотрудников в него (массив), закрыть к нему доступ извне (сделать приватным).
+        //    3. +Все статические методы по работе с массивом перенести в этот класс и сделать нестатическими.
+        //    4. +Добавить несколько новых методов:
         //        1. Добавить нового сотрудника (создаем объект, заполняем поля, кладем в массив).
         //        Нужно найти свободную ячейку в массиве и добавить нового сотрудника в нее. Искать нужно всегда с начала, так как возможно добавление в ячейку удаленных ранее сотрудников.
         //        2. Удалить сотрудника (находим сотрудника по Ф. И. О. и/или id, обнуляем его ячейку в массиве).
-        //    5. Изменить сотрудника (получить сотрудника по Ф. И. О., модернизировать его запись):
+        //    5. +Изменить сотрудника (получить сотрудника по Ф. И. О., модернизировать его запись):
         //        1. Изменить зарплату.
         //        2. Изменить отдел.
         //        Придумать архитектуру. Сделать или два метода, или один, но продумать его.
-        //    6. Получить Ф. И. О. всех сотрудников по отделам (напечатать список отделов и их сотрудников).
+        //    6. +Получить Ф. И. О. всех сотрудников по отделам (напечатать список отделов и их сотрудников).
 
         System.out.println("Базовая сложность");
 
@@ -93,17 +93,21 @@ public class Main {
         employeeBook.printAverageSalaryInDept(employeeBook.getEmployees(), 2);
         System.out.println();
         employeeBook.setIncreaseSalaryByPercentInDept(employeeBook.getEmployees(), 2, 30);
-        employeeBook.printAllInDept(employeeBook.getEmployees(), 2);
+        employeeBook.printAllEmployeesInDept(employeeBook.getEmployees(), 2);
         System.out.println();
         employeeBook.printAllEmployeesSalaryLowerThanThis(employeeBook.getEmployees(), 120000);
         System.out.println();
         employeeBook.printAllEmployeesSalaryUpperThanThis(employeeBook.getEmployees(), 200000);
-        //добавляем нового
         System.out.println();
         employeeBook.addNewEmployee(new Employee("Новый Сотрудник Сотрудниковый", 5, 50000));
         employeeBook.printAllEmployees(employeeBook.getEmployees());
         System.out.println();
         employeeBook.deleteEmployee("Десятый Сотрудник Сотрудниковый", 0);
         employeeBook.printAllEmployees(employeeBook.getEmployees());
+        System.out.println();
+        employeeBook.changeEmployeeSpecs("Первый Сотрудник Сотрудниковый",102,888);
+        employeeBook.printAllEmployees(employeeBook.getEmployees());
+        System.out.println();
+        employeeBook.printAllEmployeesByDepartments(employeeBook.getEmployees());
     }
 }

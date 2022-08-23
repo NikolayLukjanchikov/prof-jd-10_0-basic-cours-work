@@ -1,21 +1,22 @@
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class EmployeeBook {
     //- **Очень сложно**
     //    Привести структуру проекта к ООП.
-    //    1. Создать класс EmployeeBook.
-    //    2. Перенести хранилище сотрудников в него (массив), закрыть к нему доступ извне (сделать приватным).
-    //    3. Все статические методы по работе с массивом перенести в этот класс и сделать нестатическими.
+    //    1. +Создать класс EmployeeBook.
+    //    2. +Перенести хранилище сотрудников в него (массив), закрыть к нему доступ извне (сделать приватным).
+    //    3. +Все статические методы по работе с массивом перенести в этот класс и сделать нестатическими.
     //    4. Добавить несколько новых методов:
-    //        1. Добавить нового сотрудника (создаем объект, заполняем поля, кладем в массив).
+    //        +1. Добавить нового сотрудника (создаем объект, заполняем поля, кладем в массив).
     //        Нужно найти свободную ячейку в массиве и добавить нового сотрудника в нее.
     //        Искать нужно всегда с начала, так как возможно добавление в ячейку удаленных ранее сотрудников.
-    //        2. Удалить сотрудника (находим сотрудника по Ф. И. О. и/или id, обнуляем его ячейку в массиве).
+    //        +2. Удалить сотрудника (находим сотрудника по Ф. И. О. и/или id, обнуляем его ячейку в массиве).
     //    5. Изменить сотрудника (получить сотрудника по Ф. И. О., модернизировать его запись):
-    //        1. Изменить зарплату.
-    //        2. Изменить отдел.
+    //        +1. Изменить зарплату.
+    //        +2. Изменить отдел.
     //        Придумать архитектуру. Сделать или два метода, или один, но продумать его.
-    //    6. Получить Ф. И. О. всех сотрудников по отделам (напечатать список отделов и их сотрудников).
+    //    6. +Получить Ф. И. О. всех сотрудников по отделам (напечатать список отделов и их сотрудников).
     private Employee[] employees = new Employee[10];
 
     public void addNewEmployee(Employee newEmployee) {
@@ -34,9 +35,47 @@ public class EmployeeBook {
 
     public void deleteEmployee(String fullNameEmployeeToDelete, int id) {
         for (int i = 0; i < employees.length; i++) {
-            if ((employees[i] != null) && ((employees[i].getFio().equals(fullNameEmployeeToDelete))) || (employees[i].getId()==id)) {
+            if ((employees[i] != null) && ((employees[i].getFio().equals(fullNameEmployeeToDelete))) || (employees[i].getId() == id)) {
                 employees[i] = null;
             }
+        }
+    }
+
+    public void changeEmployeeSpecs(String fullNameEmployeeToChange, int newSalary, int newDepartment) {
+        for (int i = 0; i < employees.length; i++) {
+            if ((employees[i] != null) && (employees[i].getFio().equals(fullNameEmployeeToChange))) {
+                if (newSalary > 0) {
+                    employees[i].setSalary(newSalary);
+                }
+                if ((newDepartment > 0) && (employees[i].getDepartment() != newDepartment)) {
+                    employees[i].setDepartment(newDepartment);
+                }
+            }
+        }
+    }
+    public void printAllEmployeesByDepartments(Employee[] employeesList) {
+        Employee[] solidEmployeeList = new Employee[employeesList.length];
+        int counter = 0;
+        for (int i = 0; i < employeesList.length; i++) {
+            if (employees[i] != null) {
+                solidEmployeeList[counter] = employeesList[i];
+                counter++;
+            }
+        }
+        employeesList = Arrays.copyOf(solidEmployeeList, counter);
+        Arrays.sort(employeesList, Comparator.comparing(Employee::getDepartment));
+
+        boolean isDiffDept = true;
+        for (int i = 0; i < employeesList.length; i++) {
+            if (isDiffDept) {
+                System.out.println("Сотрудники отдела №" + employeesList[i].getDepartment()+":");
+            }
+            System.out.println(employeesList[i].getFio());
+            if ((i+1) > employeesList.length-1){
+                break;
+            } else if (employeesList[i].getDepartment() == employeesList[i+1].getDepartment()) {
+                isDiffDept = false;
+            } else isDiffDept = true;
         }
     }
 
@@ -155,11 +194,11 @@ public class EmployeeBook {
         System.out.println("Средняя зарплата по отделу № " + deptId + " равна: " + getAverageSalary(getSpecificDepartment(employeesList, deptId)));
     }
 
-    public Employee[] setIncreaseSalaryByPercentInDept(Employee[] employeesList, int deptId, int percent) {
-        return setIncreaseSalaryByPercentToAllEmployees(getSpecificDepartment(employeesList, deptId), percent);
+    public void setIncreaseSalaryByPercentInDept(Employee[] employeesList, int deptId, int percent) {
+         setIncreaseSalaryByPercentToAllEmployees(getSpecificDepartment(employeesList, deptId), percent);
     }
 
-    public void printAllInDept(Employee[] employeesList, int deptId) {
+    public void printAllEmployeesInDept(Employee[] employeesList, int deptId) {
         System.out.println("Сотрудники в отделе: " + deptId);
         Employee[] deptEmployee = getSpecificDepartment(employeesList, deptId);
         for (int i = 0; i < deptEmployee.length; i++) {
@@ -184,7 +223,6 @@ public class EmployeeBook {
             }
         }
     }
-
 
     public void setEmployees(Employee[] employees) {
         this.employees = employees;

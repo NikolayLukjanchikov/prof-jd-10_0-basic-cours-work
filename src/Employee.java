@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Objects;
 
 public class Employee {
@@ -38,10 +37,6 @@ public class Employee {
         return ("id: " + id + ", ФИО: " + fio + ", З/П: " + salary);
     }
 
-
-//    public static int getCounter() {
-//        return counter;
-//    }
 
     public int getId() {
         return id;

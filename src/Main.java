@@ -58,14 +58,14 @@ public class Main {
 
         EmployeeBook employeeBook = new EmployeeBook();
 
-        employeeBook.getEmployees()[0] = new Employee("Первый Сотрудник Сотрудниковый", 1, 100000);
-        employeeBook.getEmployees()[1] = new Employee("Второй Сотрудник Сотрудниковый", 1, 200000);
+       // employeeBook.getEmployees()[0] = new Employee("Первый Сотрудник Сотрудниковый", 5, 100000);
+        employeeBook.getEmployees()[1] = new Employee("Второй Сотрудник Сотрудниковый", 1, 111);
         employeeBook.getEmployees()[2] = new Employee("Третий Сотрудник Сотрудниковый", 2, 300000);
         employeeBook.getEmployees()[3] = new Employee("Четвёртый Сотрудник Сотрудниковый", 2, 50000);
         employeeBook.getEmployees()[4] = new Employee("Пятый Сотрудник Сотрудниковый", 4, 150000);
         employeeBook.getEmployees()[5] = new Employee("Шестой Сотрудник Сотрудниковый", 2, 120000);
         employeeBook.getEmployees()[6] = new Employee("Седьмой Сотрудник Сотрудниковый", 3, 170000);
-        employeeBook.getEmployees()[8] = new Employee("Девятый Сотрудник Сотрудниковый", 5, 210000);
+        employeeBook.getEmployees()[8] = new Employee("Девятый Сотрудник Сотрудниковый", 2, 99999999);
         employeeBook.getEmployees()[9] = new Employee("Десятый Сотрудник Сотрудниковый", 5, 50000);
 
 
@@ -99,10 +99,10 @@ public class Main {
         System.out.println();
         employeeBook.printAllEmployeesSalaryUpperThanThis(employeeBook.getEmployees(), 200000);
         System.out.println();
-        employeeBook.addNewEmployee(new Employee("Новый Сотрудник Сотрудниковый", 5, 50000));
+        employeeBook.addNewEmployee(new Employee("Первый Сотрудник Сотрудниковый", 5, 50000));
         employeeBook.printAllEmployees(employeeBook.getEmployees());
-        System.out.println();
-        employeeBook.deleteEmployee("Десятый Сотрудник Сотрудниковый", 0);
+        System.out.println("Удаляем");
+        employeeBook.deleteEmployee("Первый Сотрудник Сотрудниковый", 9);
         employeeBook.printAllEmployees(employeeBook.getEmployees());
         System.out.println();
         employeeBook.changeEmployeeSpecs("Первый Сотрудник Сотрудниковый",102,888);

@@ -29,13 +29,14 @@ public class EmployeeBook {
                 }
             } else if (isEmployeeNotInBook) {
                 employees[i] = newEmployee;
+                break;
             }
         }
     }
 
     public void deleteEmployee(String fullNameEmployeeToDelete, int id) {
         for (int i = 0; i < employees.length; i++) {
-            if ((employees[i] != null) && ((employees[i].getFio().equals(fullNameEmployeeToDelete))) || (employees[i].getId() == id)) {
+            if ((employees[i] != null) && ((employees[i].getFio().equals(fullNameEmployeeToDelete))) && (employees[i].getId() == id)) {
                 employees[i] = null;
             }
         }
@@ -44,15 +45,16 @@ public class EmployeeBook {
     public void changeEmployeeSpecs(String fullNameEmployeeToChange, int newSalary, int newDepartment) {
         for (int i = 0; i < employees.length; i++) {
             if ((employees[i] != null) && (employees[i].getFio().equals(fullNameEmployeeToChange))) {
-                if (newSalary > 0) {
+                if (newSalary != employees[i].getSalary()) {
                     employees[i].setSalary(newSalary);
                 }
-                if ((newDepartment > 0) && (employees[i].getDepartment() != newDepartment)) {
+                if (employees[i].getDepartment() != newDepartment) {
                     employees[i].setDepartment(newDepartment);
                 }
             }
         }
     }
+
     public void printAllEmployeesByDepartments(Employee[] employeesList) {
         Employee[] solidEmployeeList = new Employee[employeesList.length];
         int counter = 0;
@@ -68,12 +70,12 @@ public class EmployeeBook {
         boolean isDiffDept = true;
         for (int i = 0; i < employeesList.length; i++) {
             if (isDiffDept) {
-                System.out.println("Сотрудники отдела №" + employeesList[i].getDepartment()+":");
+                System.out.println("Сотрудники отдела №" + employeesList[i].getDepartment() + ":");
             }
             System.out.println(employeesList[i].getFio());
-            if ((i+1) > employeesList.length-1){
+            if ((i + 1) > employeesList.length - 1) {
                 break;
-            } else if (employeesList[i].getDepartment() == employeesList[i+1].getDepartment()) {
+            } else if (employeesList[i].getDepartment() == employeesList[i + 1].getDepartment()) {
                 isDiffDept = false;
             } else isDiffDept = true;
         }
@@ -98,12 +100,21 @@ public class EmployeeBook {
     }
 
     public void printAllEmployeesWithMinSalary(Employee[] employeesList) {
-        int min = employeesList[0].getSalary();
-        for (int i = 1; i < employeesList.length; i++) {
+        int min = 0;
+        for (int i = 0; i < employeesList.length; i++) {
+            if (employeesList[i] != null) {
+                min = employeesList[i].getSalary();
+                break;
+            }
+        }
+        Employee[] minSalaryEmployees = new Employee[employeesList.length];
+        for (int i = 0; i < employeesList.length; i++) {
             if ((employeesList[i] != null) && (employeesList[i].getSalary() < min)) {
                 min = employeesList[i].getSalary();
+                minSalaryEmployees[i] = employeesList[i];
             }
-        }//2 цикла так как сотрудников может быть не один, сначала находим с минимальной ЗП, потом находим всех с такой ЗП
+        }
+        //2 цикла так как сотрудников может быть не один, сначала находим с минимальной ЗП, потом находим всех с такой ЗП
         for (int i = 0; i < employeesList.length; i++) {
             if ((employeesList[i] != null) && (min == employeesList[i].getSalary())) {
                 System.out.println("Минимальная ЗП: " + employeesList[i]);
@@ -112,8 +123,14 @@ public class EmployeeBook {
     }
 
     public void printAllEmployeesWithMaxSalary(Employee[] employeesList) {
-        int max = employeesList[0].getSalary();
-        for (int i = 1; i < employeesList.length; i++) {
+        int max = 0;
+        for (int i = 0; i < employeesList.length; i++) {
+            if (employeesList[i] != null) {
+                max = employeesList[i].getSalary();
+                break;
+            }
+        }
+        for (int i = 0; i < employeesList.length; i++) {
             if ((employeesList[i] != null) && (employeesList[i].getSalary() >= max)) {
                 max = employeesList[i].getSalary();
             }
@@ -163,16 +180,15 @@ public class EmployeeBook {
     }
 
     private Employee[] getSpecificDepartment(Employee[] employeesList, int deptId) {
-        Employee[] employeesByDept = new Employee[1];
+        Employee[] employeesByDept = new Employee[employeesList.length];
         int j = 0;
         for (int i = 0; i < employeesList.length; i++) {
             if ((employeesList[i] != null) && (employeesList[i].getDepartment() == deptId)) {
                 employeesByDept[j] = employeesList[i];
                 j++;
-                employeesByDept = Arrays.copyOf(employeesByDept, employeesByDept.length + 1);
             }
         }
-        employeesByDept = Arrays.copyOf(employeesByDept, employeesByDept.length - 1); //по другому не придумал, такой вариант для "уравновешивания" длины массива
+        employeesByDept = Arrays.copyOf(employeesByDept, j);
         return employeesByDept;
     }
 
@@ -195,7 +211,7 @@ public class EmployeeBook {
     }
 
     public void setIncreaseSalaryByPercentInDept(Employee[] employeesList, int deptId, int percent) {
-         setIncreaseSalaryByPercentToAllEmployees(getSpecificDepartment(employeesList, deptId), percent);
+        setIncreaseSalaryByPercentToAllEmployees(getSpecificDepartment(employeesList, deptId), percent);
     }
 
     public void printAllEmployeesInDept(Employee[] employeesList, int deptId) {

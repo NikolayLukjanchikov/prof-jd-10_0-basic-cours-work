@@ -20,12 +20,12 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return id == employee.id && Objects.equals(fio, employee.fio);
+        return Objects.equals(fio, employee.fio);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, fio);
+        return Objects.hash(fio);
     }
 
     @Override

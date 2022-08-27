@@ -101,21 +101,23 @@ public class EmployeeBook {
 
     public void printAllEmployeesWithMinSalary(Employee[] employeesList) {
         int min = 0;
+        int firstNotNullCell = 0;
         for (int i = 0; i < employeesList.length; i++) {
             if (employeesList[i] != null) {
                 min = employeesList[i].getSalary();
+                firstNotNullCell = i;
                 break;
             }
         }
         Employee[] minSalaryEmployees = new Employee[employeesList.length];
-        for (int i = 0; i < employeesList.length; i++) {
+        for (int i = firstNotNullCell; i < employeesList.length; i++) {
             if ((employeesList[i] != null) && (employeesList[i].getSalary() < min)) {
                 min = employeesList[i].getSalary();
                 minSalaryEmployees[i] = employeesList[i];
             }
         }
         //2 цикла так как сотрудников может быть не один, сначала находим с минимальной ЗП, потом находим всех с такой ЗП
-        for (int i = 0; i < employeesList.length; i++) {
+        for (int i = firstNotNullCell; i < employeesList.length; i++) {
             if ((employeesList[i] != null) && (min == employeesList[i].getSalary())) {
                 System.out.println("Минимальная ЗП: " + employeesList[i]);
             }
@@ -124,18 +126,20 @@ public class EmployeeBook {
 
     public void printAllEmployeesWithMaxSalary(Employee[] employeesList) {
         int max = 0;
+        int firstNotNullCell = 0;
         for (int i = 0; i < employeesList.length; i++) {
             if (employeesList[i] != null) {
                 max = employeesList[i].getSalary();
+                firstNotNullCell = i;
                 break;
             }
         }
-        for (int i = 0; i < employeesList.length; i++) {
+        for (int i = firstNotNullCell; i < employeesList.length; i++) {
             if ((employeesList[i] != null) && (employeesList[i].getSalary() >= max)) {
                 max = employeesList[i].getSalary();
             }
         }//2 цикла так как сотрудников может быть не один, сначала находим с минимальной ЗП, потом находим всех с такой ЗП
-        for (int i = 0; i < employeesList.length; i++) {
+        for (int i = firstNotNullCell; i < employeesList.length; i++) {
             if ((employeesList[i] != null) && (max == employeesList[i].getSalary())) {
                 System.out.println("Максимальная ЗП: " + employeesList[i]);
             }

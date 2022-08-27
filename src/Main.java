@@ -59,8 +59,8 @@ public class Main {
         EmployeeBook employeeBook = new EmployeeBook();
 
        // employeeBook.getEmployees()[0] = new Employee("Первый Сотрудник Сотрудниковый", 5, 100000);
-        employeeBook.getEmployees()[1] = new Employee("Второй Сотрудник Сотрудниковый", 1, 111);
-        employeeBook.getEmployees()[2] = new Employee("Третий Сотрудник Сотрудниковый", 2, 300000);
+        //employeeBook.getEmployees()[1] = new Employee("Второй Сотрудник Сотрудниковый", 1, 111);
+        //employeeBook.getEmployees()[2] = new Employee("Третий Сотрудник Сотрудниковый", 2, 300000);
         employeeBook.getEmployees()[3] = new Employee("Четвёртый Сотрудник Сотрудниковый", 2, 50000);
         employeeBook.getEmployees()[4] = new Employee("Пятый Сотрудник Сотрудниковый", 4, 150000);
         employeeBook.getEmployees()[5] = new Employee("Шестой Сотрудник Сотрудниковый", 2, 120000);
